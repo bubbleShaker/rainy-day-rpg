@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#2b3440">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="雨の港町を舞台にした、スマホで遊べる 3D アクション RPG">
+<title>あまやどりの町</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="flash"></div>
+<div id="hurt"></div>
+<div id="pops"></div>
+
+<div id="hud" class="hidden">
+  <div id="topLeft">
+    <div id="status" class="panel">
+      <div class="row"><b id="lv">Lv 1</b><span id="hpText">HP 100/100</span></div>
+      <div class="bar hp"><i id="hpFill"></i></div>
+      <div class="bar exp"><i id="expFill"></i></div>
+    </div>
+    <div id="questBox" class="panel">
+      <div id="shards"><span class="shard"></span><span class="shard"></span><span class="shard"></span></div>
+      <div id="questText"></div>
+    </div>
+    <div id="messages"></div>
+  </div>
+  <div id="topRight">
+    <canvas id="minimap" width="220" height="220"></canvas>
+    <button id="muteBtn" class="iconbtn" aria-label="音のオンオフ">♪</button>
+  </div>
+  <div id="bossbar" class="hidden"><div id="bossName"></div><div class="bar"><i id="bossFill"></i></div></div>
+  <div id="banner"></div>
+  <div id="joy" class="hidden"><div id="knob"></div></div>
+  <div id="joyHint">画面の左側をドラッグで移動<br>右側をドラッグで視点</div>
+  <div id="buttons">
+    <button class="act big" data-act="attack">攻撃</button>
+    <button class="act" data-act="dodge">回避</button>
+    <button class="act" data-act="skill" id="skillBtn"><span>スピン</span><i class="cd" id="skillCd"></i></button>
+    <button class="act" data-act="item" id="itemBtn"><span>ココア</span><em id="cocoaCount">2</em></button>
+    <button class="act talk hidden" data-act="talk" id="talkBtn">話す</button>
+  </div>
+  <div id="pcHint">WASD 移動 ／ ドラッグ 視点 ／ クリック・J 攻撃 ／ Space 回避 ／ K スピン ／ Q ココア ／ E 話す</div>
+</div>
+
+<div id="dialog" class="hidden"><div id="dlgName"></div><div id="dlgText"></div><div id="dlgNext">▼</div></div>
+
+<div id="title" class="screen">
+  <div class="logo">
+    <small>Rainy Day Quest</small>
+    <h1>あまやどりの町</h1>
+    <p>― 晴れのかけらと 雨の精霊 ―</p>
+  </div>
+  <div class="btns">
+    <button id="startBtn">はじめから</button>
+    <button id="continueBtn" class="hidden">つづきから</button>
+  </div>
+  <p class="note">音が出ます ／ 横画面がおすすめ</p>
+</div>
+
+<div id="dead" class="screen hidden">
+  <div class="logo"><h2>目の前が まっくらになった…</h2><p>町の人が 広場まで運んでくれたようだ。</p></div>
+  <div class="btns"><button id="reviveBtn">広場で目をさます</button></div>
+</div>
+
+<div id="ending" class="screen hidden">
+  <div class="logo">
+    <small>THE END</small>
+    <h1>雨あがりの町</h1>
+    <p>百日ぶりの青空に、大きな虹がかかった。</p>
+    <p id="endStats"></p>
+  </div>
+  <div class="btns">
+    <button id="walkBtn">晴れた町を散歩する</button>
+    <button id="titleBtn">タイトルへ</button>
+  </div>
+</div>
+
+<div id="loading">読み込み中…</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
